@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_soil_light"
+    tools:context=".ui.profile.ProfileActivity">
+
+    <!-- Back Button -->
+    <ImageButton
+        android:id="@+id/btn_back"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/profile_title"
+        android:padding="12dp"
+        android:src="@drawable/ic_back_profile"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Title -->
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/profile_title"
+        android:textColor="@color/text_green_dark"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/btn_back"
+        app:layout_constraintStart_toEndOf="@id/btn_back"
+        app:layout_constraintTop_toTopOf="@id/btn_back" />
+
+    <!-- Profile Image Container -->
+    <FrameLayout
+        android:id="@+id/fl_profile_container"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_back">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/iv_profile_user"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="@id/tv_greeting_user"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_greeting_user"
+            app:shapeAppearanceOverlay="@style/CircularImageView"
+            tools:src="@drawable/bg_welcome_screen" />
+
+        <!-- Camera Icon Button -->
+        <ImageButton
+            android:id="@+id/btn_change_photo"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_gravity="bottom|end"
+            android:background="@drawable/bg_circle_profile"
+            android:contentDescription="@string/profile_title"
+            android:padding="6dp"
+            android:src="@drawable/ic_camera_profile" />
+    </FrameLayout>
+
+    <!-- Name Label -->
+    <TextView
+        android:id="@+id/tv_name_label"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="24dp"
+        android:text="@string/profile_name_label"
+        android:textColor="@color/text_green_dark"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fl_profile_container" />
+
+    <!-- Name Input -->
+    <EditText
+        android:id="@+id/et_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:autofillHints="name"
+        android:hint="@string/profile_name_hint"
+        android:inputType="textPersonName"
+        android:paddingStart="0dp"
+        android:paddingTop="8dp"
+        android:paddingEnd="0dp"
+        android:paddingBottom="8dp"
+        android:textColor="@color/text_green_dark"
+        android:textColorHint="@color/forest_tan"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@id/tv_name_label"
+        app:layout_constraintStart_toStartOf="@id/tv_name_label"
+        app:layout_constraintTop_toBottomOf="@id/tv_name_label" />
+
+    <!-- Location Label -->
+    <TextView
+        android:id="@+id/tv_location_label"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/profile_location_label"
+        android:textColor="@color/text_green_dark"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@id/tv_name_label"
+        app:layout_constraintStart_toStartOf="@id/tv_name_label"
+        app:layout_constraintTop_toBottomOf="@id/et_name" />
+
+    <!-- Location Input -->
+    <EditText
+        android:id="@+id/et_location"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:autofillHints="postalAddress"
+        android:hint="@string/profile_location_hint"
+        android:inputType="text"
+        android:paddingStart="0dp"
+        android:paddingTop="8dp"
+        android:paddingEnd="0dp"
+        android:paddingBottom="8dp"
+        android:textColor="@color/text_green_dark"
+        android:textColorHint="@color/forest_tan"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@id/tv_location_label"
+        app:layout_constraintStart_toStartOf="@id/tv_location_label"
+        app:layout_constraintTop_toBottomOf="@id/tv_location_label" />
+
+    <!-- Logout Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_logout"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="16dp"
+        android:background="@android:color/transparent"
+        android:text="Logout"
+        android:textColor="@color/forest_brown_dark"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/btn_save"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:strokeColor="@color/forest_brown_dark"
+        app:strokeWidth="2dp" />
+
+    <!-- Save Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_save"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/bg_button_green"
+        android:text="@string/profile_save_button"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

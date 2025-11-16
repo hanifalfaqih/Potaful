@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="forest_brown_darkest">#4e2c11</color>
+    <color name="forest_brown_dark">#744922</color>
+    <color name="forest_brown_medium">#885e30</color>
+    <color name="forest_tan">#a6824c</color>
+    <color name="forest_beige">#bcac70</color>
+    <color name="forest_green_pale">#c1c88a</color>
+    <color name="forest_green_light">#a8b668</color>
+    <color name="forest_green_medium">#66733b</color>
+    <color name="forest_green_dark">#414d26</color>
+    <color name="forest_green_darkest">#333e20</color>
+
+    <color name="bg_soil_light">#FBF0CB</color>
+    <color name="text_green_dark">#414C27</color>
+    <color name="soft_green_light">#E8F5E9</color>
+
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+</resources>

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "45861292171",
+    "project_id": "potafull-smart-pot",
+    "storage_bucket": "potafull-smart-pot.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:45861292171:android:829c833649cf8c92a82c8e",
+        "android_client_info": {
+          "package_name": "id.hanifalfaqih.potaful"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "45861292171-3ejo96tmd9b5vb85siuudp3bl9ldubk9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCky8DHfvg2lWiRjFI-RseAoPPsOV5ZL0I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "45861292171-3ejo96tmd9b5vb85siuudp3bl9ldubk9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
