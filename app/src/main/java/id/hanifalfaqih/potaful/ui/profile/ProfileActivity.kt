@@ -39,9 +39,9 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun loadUserProfile() {
-        // Load user data from preferences
+        // Load user data from preferences (local database)
         binding.etName.setText(preferenceManager.getUserName() ?: "")
-        binding.etLocation.setText("") // Add location to PreferenceManager if needed
+        binding.etLocation.setText(preferenceManager.getUserLocation() ?: "")
 
         // Load user photo
         val photoUrl = preferenceManager.getUserPhoto()
@@ -77,16 +77,27 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun saveProfile() {
-        val name = binding.etName.text.toString()
-        // val location = binding.etLocation.text.toString() // TODO: Add location field to PreferenceManager
+        val name = binding.etName.text.toString().trim()
+        val location = binding.etLocation.text.toString().trim()
 
-        if (name.isNotEmpty()) {
-            preferenceManager.saveUserName(name)
-            Toast.makeText(this, "Profile berhasil disimpan", Toast.LENGTH_SHORT).show()
-            finish()
-        } else {
+        if (name.isEmpty()) {
             Toast.makeText(this, "Nama tidak boleh kosong", Toast.LENGTH_SHORT).show()
+            return
         }
+
+        // Save to local database
+        preferenceManager.saveUserName(name)
+
+        // Save location if not empty
+        if (location.isNotEmpty()) {
+            preferenceManager.saveUserLocation(location)
+        }
+
+        Toast.makeText(this, "Profil berhasil disimpan", Toast.LENGTH_SHORT).show()
+
+        // Set result to notify dashboard to refresh
+        setResult(RESULT_OK)
+        finish()
     }
 
     private fun showLogoutConfirmation() {

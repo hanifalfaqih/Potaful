@@ -42,6 +42,10 @@ class DashboardActivity : AppCompatActivity() {
     private lateinit var potSummaryAdapter: PotSummaryAdapter
     private lateinit var potDashboardAdapter: PotDashboardAdapter
 
+    companion object {
+        private const val REQUEST_PROFILE = 1001
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDashboardBinding.inflate(layoutInflater)
@@ -134,7 +138,8 @@ class DashboardActivity : AppCompatActivity() {
 
     private fun setupListeners() {
         binding.ivProfileUser.setOnClickListener {
-            startActivity(Intent(this, ProfileActivity::class.java))
+            val intent = Intent(this, ProfileActivity::class.java)
+            startActivityForResult(intent, REQUEST_PROFILE)
         }
     }
 
@@ -279,7 +284,10 @@ class DashboardActivity : AppCompatActivity() {
         binding.tvAirHumidity.text = "Air humidity: ${data.main.humidity}%" // fallback literal
         binding.tvTemperatureUser.text =
             String.format(Locale.getDefault(), "%.0f°C", data.main.temp)
+
+        // Display city name from weather API (based on saved location from local DB)
         binding.tvLocationUser.text = data.name
+
         val iconCode = data.weather.firstOrNull()?.icon ?: ""
         binding.ivCloudConditionUser.setImageResource(mapWeatherIcon(iconCode))
     }
@@ -332,8 +340,10 @@ class DashboardActivity : AppCompatActivity() {
         binding.tvDateUser.text = dateFormat.format(Date())
         binding.tvTimeUser.text = timeFormat.format(Date())
 
+        // Load location from local database (PreferenceManager)
         val savedLocation = preferenceManager.getUserLocation()
         val city = savedLocation?.ifBlank { "Tangerang" } ?: "Tangerang"
+        Log.d("DashboardActivity", "Loading weather for location from local DB: $city")
         viewModel.loadWeather(city, BuildConfig.OPEN_WEATHER_API_KEY)
     }
 
@@ -362,6 +372,24 @@ class DashboardActivity : AppCompatActivity() {
         } else {
             // Set default image if no photo
             binding.ivProfileUser.setImageResource(R.drawable.bg_welcome_screen)
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        // Refresh profile data when returning to dashboard
+        // This ensures any profile changes are reflected
+        loadUserProfile()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_PROFILE && resultCode == RESULT_OK) {
+            // Profile was updated, refresh the UI
+            loadUserProfile()
+
+            // Also refresh weather if location was changed
+            refreshWeather()
         }
     }
 
