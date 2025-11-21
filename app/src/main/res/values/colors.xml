@@ -18,4 +18,15 @@
 
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- Status colors -->
+    <color name="status_baik_bg">#C8E6C9</color>
+    <color name="status_cukup_bg">#FFE0B2</color>
+    <color name="status_perlu_perhatian_bg">#FFF9C4</color>
+    <color name="status_bahaya_bg">#FFCDD2</color>
+
+    <color name="status_baik_text">#1B5E20</color>
+    <color name="status_cukup_text">#E65100</color>
+    <color name="status_perlu_perhatian_text">#F57F17</color>
+    <color name="status_bahaya_text">#B71C1C</color>
 </resources>

@@ -13,7 +13,6 @@ import id.hanifalfaqih.potaful.R
 import id.hanifalfaqih.potaful.data.remote.ApiConfig
 import id.hanifalfaqih.potaful.data.repository.ApiRepository
 import id.hanifalfaqih.potaful.databinding.ActivityWelcomeUserBinding
-import id.hanifalfaqih.potaful.ui.onboarding.OnboardingUserActivity
 
 class WelcomeUserActivity : AppCompatActivity() {
 
@@ -31,10 +30,6 @@ class WelcomeUserActivity : AppCompatActivity() {
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
-        }
-
-        binding.btnTanamSekarang.setOnClickListener {
-            startActivity(Intent(this, OnboardingUserActivity::class.java))
         }
 
         binding.btnSignInWithGoogle.setOnClickListener {

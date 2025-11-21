@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/forest_brown_darkest"
     tools:context=".ui.onboarding.OnboardingPage1Fragment">
 
     <TextView
@@ -12,47 +14,11 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
-        android:text="Seberapa sering kamu meninggalkan pot kamu untuk bepergian?"
+        android:fontFamily="@font/manrope_bold"
+        android:text="How often do you leave your pot when you go on trips?"
         android:textColor="@color/white"
         android:textSize="32sp"
         android:textStyle="bold" />
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cv_rarely_travel"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="48dp"
-        android:layout_marginEnd="16dp"
-        android:backgroundTint="@color/forest_brown_medium"
-        android:clickable="true"
-        android:focusable="true"
-        android:foreground="?android:attr/selectableItemBackground">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="24dp">
-
-            <ImageView
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:src="@drawable/ic_home_onboarding" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Jarang banget"
-                android:textAlignment="center"
-                android:textColor="@color/white"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-        </LinearLayout>
-
-    </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cv_sometimes_travel"
@@ -61,10 +27,10 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="48dp"
         android:layout_marginEnd="16dp"
-        android:backgroundTint="@color/forest_brown_medium"
+        android:checkable="true"
         android:clickable="true"
         android:focusable="true"
-        android:foreground="?android:attr/selectableItemBackground">
+        app:cardBackgroundColor="@color/selector_onboarding_card_background">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -81,7 +47,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Kadang - kadang aja"
+                android:fontFamily="@font/manrope_semibold"
+                android:text="Sometimes"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="20sp"
@@ -98,10 +65,10 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="48dp"
         android:layout_marginEnd="16dp"
-        android:backgroundTint="@color/forest_brown_medium"
+        android:checkable="true"
         android:clickable="true"
         android:focusable="true"
-        android:foreground="?android:attr/selectableItemBackground">
+        app:cardBackgroundColor="@color/selector_onboarding_card_background">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -118,7 +85,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Cukup sering"
+                android:fontFamily="@font/manrope_semibold"
+                android:text="Pretty often"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="20sp"

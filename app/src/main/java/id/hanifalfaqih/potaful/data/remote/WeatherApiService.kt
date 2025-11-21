@@ -9,6 +9,6 @@ interface WeatherApiService {
         @Query("q") city: String,
         @Query("appid") apiKey: String,
         @Query("units") units: String = "metric",
-        @Query("lang") lang: String = "id"
+        @Query("lang") lang: String = "en"
     ): id.hanifalfaqih.potaful.data.remote.response.WeatherResponse
 }

@@ -7,7 +7,9 @@ import id.hanifalfaqih.potaful.data.remote.Result
 import id.hanifalfaqih.potaful.data.remote.WeatherApiService
 import id.hanifalfaqih.potaful.data.remote.request.AddPotRequest
 import id.hanifalfaqih.potaful.data.remote.response.GoogleAuthUrlResponse
+import id.hanifalfaqih.potaful.data.remote.response.HydrationListResponse
 import id.hanifalfaqih.potaful.data.remote.response.MyPotsResponse
+import id.hanifalfaqih.potaful.data.remote.response.WateringResponse
 import id.hanifalfaqih.potaful.data.remote.response.WeatherResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -50,7 +52,10 @@ class ApiRepository(private val apiService: ApiService) {
         }
     }
 
-    suspend fun addPot(token: String, potId: String): Result<Any> {
+    suspend fun addPot(
+        token: String,
+        potId: String
+    ): Result<id.hanifalfaqih.potaful.data.remote.response.AddPotResponse> {
         return safeApiCall {
             val request = AddPotRequest(potId)
             apiService.addPot("Bearer $token", request)
@@ -74,6 +79,17 @@ class ApiRepository(private val apiService: ApiService) {
 
     suspend fun getGoogleAuthUrl(): Result<GoogleAuthUrlResponse> {
         return safeApiCall { apiService.getGoogleAuthUrl() }
+    }
+
+    // Watering
+    suspend fun wateringPot(token: String, potId: String): Result<WateringResponse> {
+        return safeApiCall {
+            apiService.wateringPot("Bearer $token", potId)
+        }
+    }
+
+    suspend fun getHydrationSummary(token: String): Result<HydrationListResponse> = safeApiCall {
+        apiService.getHydrationSummary("Bearer $token")
     }
 
     private val weatherService: WeatherApiService by lazy {

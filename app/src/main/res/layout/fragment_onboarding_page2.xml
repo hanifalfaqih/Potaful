@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/forest_brown_darkest"
     tools:context=".ui.onboarding.OnboardingPage1Fragment">
 
     <TextView
@@ -12,7 +14,8 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
-        android:text="Apakah kamu sering menanam, atau baru mau mulai petualangan hijau ini?"
+        android:fontFamily="@font/manrope_bold"
+        android:text="Are you an experienced grower, or just beginning your green adventure?"
         android:textColor="@color/white"
         android:textSize="32sp"
         android:textStyle="bold" />
@@ -24,10 +27,10 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="48dp"
         android:layout_marginEnd="16dp"
-        android:backgroundTint="@color/forest_brown_medium"
+        android:checkable="true"
         android:clickable="true"
         android:focusable="true"
-        android:foreground="?android:attr/selectableItemBackground">
+        app:cardBackgroundColor="@color/selector_onboarding_card_background">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -44,11 +47,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Saya baru mulai"
+                android:fontFamily="@font/manrope_semibold"
+                android:text="I’m a beginner"
                 android:textAlignment="center"
                 android:textColor="@color/white"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textSize="20sp" />
 
         </LinearLayout>
 
@@ -61,10 +64,10 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="48dp"
         android:layout_marginEnd="16dp"
-        android:backgroundTint="@color/forest_brown_medium"
+        android:checkable="true"
         android:clickable="true"
         android:focusable="true"
-        android:foreground="?android:attr/selectableItemBackground">
+        app:cardBackgroundColor="@color/selector_onboarding_card_background">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -81,11 +84,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Lumayan sering menanam"
+                android:fontFamily="@font/manrope_semibold"
+                android:text="I plant quite often."
                 android:textAlignment="center"
                 android:textColor="@color/white"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textSize="20sp" />
 
         </LinearLayout>
 
@@ -98,10 +101,10 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="48dp"
         android:layout_marginEnd="16dp"
-        android:backgroundTint="@color/forest_brown_medium"
+        android:checkable="true"
         android:clickable="true"
         android:focusable="true"
-        android:foreground="?android:attr/selectableItemBackground">
+        app:cardBackgroundColor="@color/selector_onboarding_card_background">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -118,11 +121,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Cukup berpengalaman"
+                android:fontFamily="@font/manrope_semibold"
+                android:text="Somewhat experienced"
                 android:textAlignment="center"
                 android:textColor="@color/white"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textSize="20sp" />
 
         </LinearLayout>
 

@@ -8,6 +8,7 @@ import java.util.concurrent.TimeUnit
 
 object ApiConfig {
     private const val BASE_URL = "https://api.lutfialvarop.cloud/"
+    private const val N8N_BASE_URL = "https://potaful2.app.n8n.cloud/"
 
     private fun provideOkHttpClient(): OkHttpClient {
         val loggingInterceptor = HttpLoggingInterceptor().apply {
@@ -30,8 +31,20 @@ object ApiConfig {
             .build()
     }
 
+    private fun provideN8NRetrofit(): Retrofit {
+        return Retrofit.Builder()
+            .baseUrl(N8N_BASE_URL)
+            .client(provideOkHttpClient())
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+    }
+
     fun getApiService(): ApiService {
         return provideRetrofit().create(ApiService::class.java)
+    }
+
+    fun getN8NApiService(): N8NApiService {
+        return provideN8NRetrofit().create(N8NApiService::class.java)
     }
 }
 

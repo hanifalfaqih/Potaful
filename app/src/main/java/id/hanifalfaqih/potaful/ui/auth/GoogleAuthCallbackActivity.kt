@@ -12,6 +12,7 @@ import id.hanifalfaqih.potaful.data.remote.ApiConfig
 import id.hanifalfaqih.potaful.data.remote.Result
 import id.hanifalfaqih.potaful.data.repository.ApiRepository
 import id.hanifalfaqih.potaful.ui.dashboard.DashboardActivity
+import id.hanifalfaqih.potaful.ui.onboarding.OnboardingUserActivity
 import id.hanifalfaqih.potaful.ui.welcome.WelcomeUserActivity
 import kotlinx.coroutines.launch
 
@@ -64,12 +65,12 @@ class GoogleAuthCallbackActivity : AppCompatActivity() {
             // Save token and set logged in status
             pref.saveAuthToken(token)
             pref.setLoggedIn(true)
-            pref.setOnboardingCompleted(true)
+            // Don't set onboarding completed yet - user needs to go through onboarding first
 
             // Fetch user profile
             fetchUserProfile(token)
         } else {
-            Toast.makeText(this, "Login gagal. Token tidak ditemukan.", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "Login failed. Token not found.", Toast.LENGTH_LONG).show()
             navigateToWelcome()
         }
     }
@@ -87,27 +88,27 @@ class GoogleAuthCallbackActivity : AppCompatActivity() {
                     pref.saveUserId(userData.id)
                     pref.saveUserName(fullName)
                     pref.saveUserEmail(userData.email)
-                    userData.photo?.let { pref.saveUserPhoto(it) }
+                    userData.urlPhoto?.let { pref.saveUserPhoto(it) }
 
                     Toast.makeText(
                         this@GoogleAuthCallbackActivity,
-                        "Login berhasil! 🎉",
+                        "Login Successful! 🎉",
                         Toast.LENGTH_SHORT
                     ).show()
 
-                    // Navigate to Dashboard
-                    navigateToDashboard()
+                    // Navigate to Onboarding to input N8N data
+                    navigateToOnboarding()
                 }
 
                 is Result.Error -> {
-                    // Even if profile fetch fails, still navigate to dashboard
+                    // Even if profile fetch fails, still navigate to onboarding
                     Log.d("GoogleCallback", "Profile fetch failed: ${result.message}")
                     Toast.makeText(
                         this@GoogleAuthCallbackActivity,
-                        "Login berhasil!",
+                        "Login Successful!",
                         Toast.LENGTH_SHORT
                     ).show()
-                    navigateToDashboard()
+                    navigateToOnboarding()
                 }
 
                 is Result.Loading -> {
@@ -119,6 +120,14 @@ class GoogleAuthCallbackActivity : AppCompatActivity() {
 
     private fun navigateToWelcome() {
         val intent = Intent(this, WelcomeUserActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        }
+        startActivity(intent)
+        finish()
+    }
+
+    private fun navigateToOnboarding() {
+        val intent = Intent(this, OnboardingUserActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
         startActivity(intent)

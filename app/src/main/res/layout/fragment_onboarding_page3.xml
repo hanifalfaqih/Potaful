@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/forest_brown_darkest"
     tools:context=".ui.onboarding.OnboardingPage1Fragment">
 
     <TextView
@@ -12,7 +14,8 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
-        android:text="Kalau boleh pilih, kamu lebih pengen nanam yang mana?"
+        android:fontFamily="@font/manrope_bold"
+        android:text="If you could pick, which one would you want to grow?"
         android:textColor="@color/white"
         android:textSize="32sp"
         android:textStyle="bold" />
@@ -23,7 +26,8 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:text="Tenang, semua bisa tumbuh subur bareng Potafull kok!"
+        android:fontFamily="@font/manrope_regular"
+        android:text="No worries, everything can grow beautifully with Potafull!"
         android:textColor="@color/white"
         android:textSize="20sp" />
 
@@ -34,10 +38,10 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="48dp"
         android:layout_marginEnd="16dp"
-        android:backgroundTint="@color/forest_brown_medium"
+        android:checkable="true"
         android:clickable="true"
         android:focusable="true"
-        android:foreground="?android:attr/selectableItemBackground">
+        app:cardBackgroundColor="@color/selector_onboarding_card_background">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -54,7 +58,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Buah"
+                android:text="Fruits"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="20sp"
@@ -71,10 +75,10 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="48dp"
         android:layout_marginEnd="16dp"
-        android:backgroundTint="@color/forest_brown_medium"
+        android:checkable="true"
         android:clickable="true"
         android:focusable="true"
-        android:foreground="?android:attr/selectableItemBackground">
+        app:cardBackgroundColor="@color/selector_onboarding_card_background">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -91,44 +95,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Sayur"
-                android:textAlignment="center"
-                android:textColor="@color/white"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-        </LinearLayout>
-
-    </com.google.android.material.card.MaterialCardView>
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cv_both"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="48dp"
-        android:layout_marginEnd="16dp"
-        android:backgroundTint="@color/forest_brown_medium"
-        android:clickable="true"
-        android:focusable="true"
-        android:foreground="?android:attr/selectableItemBackground">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="24dp">
-
-            <ImageView
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:src="@drawable/ic_fruit_vegetable_onboarding" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Dua-duanya oke!"
+                android:text="Vegetables"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="20sp"

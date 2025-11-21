@@ -1,14 +1,17 @@
 package id.hanifalfaqih.potaful.ui.dashboard.adapter
 
+import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.chip.Chip
 import id.hanifalfaqih.potaful.R
 import id.hanifalfaqih.potaful.data.remote.response.PotDetailData
 import id.hanifalfaqih.potaful.data.remote.response.PotItem
 import id.hanifalfaqih.potaful.databinding.ItemAddPotBinding
 import id.hanifalfaqih.potaful.databinding.ItemPotDashboardBinding
+import id.hanifalfaqih.potaful.ui.dashboard.SensorStatusMapper
 import java.util.Locale
 
 class PotDashboardAdapter(
@@ -27,68 +30,123 @@ class PotDashboardAdapter(
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: PotItem) {
             // Basic info
-            binding.tvPotName.text = item.typeName
-            binding.tvSoilHealthPercentage.text = formatFloat(item.soilHealth) + "%"
+            binding.tvPotName.text = item.typeName ?: "Unknown Pot"
+            binding.tvSoilHealthPercentage.text =
+                String.format(Locale.getDefault(), "%s%%", formatFloat(item.soilHealth ?: 0f))
 
-            // Check if item is expanded
-            val detailData = expandedItems[item.potId]
-            val isExpanded = detailData != null
+            // Determine expanded state directly
+            val detailData = item.potId?.let { expandedItems[it] }
 
-            if (isExpanded && detailData != null) {
-                // Show expanded data
+            if (detailData != null) {
+                // Expanded
                 binding.gridParameters.visibility = View.VISIBLE
                 binding.ivDropdownIcon.setImageResource(R.drawable.ic_show_up)
                 bindDetailData(detailData)
             } else {
-                // Show collapsed
+                // Collapsed
                 binding.gridParameters.visibility = View.GONE
                 binding.ivDropdownIcon.setImageResource(R.drawable.ic_show_down)
-                // Show basic water level - calculate from max_water and soil_health
-                val currentWater = item.maxWater * (item.soilHealth / 100.0f)
                 binding.tvWaterLevel.text =
-                    String.format(Locale.getDefault(), "%.1fL", currentWater)
+                    String.format(Locale.getDefault(), "%.2fL", item.waterLevel ?: 0f)
             }
 
-            // Click to expand/collapse
             binding.root.setOnClickListener { onItemClick(item) }
         }
 
         private fun bindDetailData(data: PotDetailData) {
             val sensorData = data.sensorData
 
-            // Water level
-            binding.tvWaterLevel.text = formatFloat(sensorData.waterLevel) + "%"
+            binding.tvWaterLevel.text =
+                String.format(Locale.getDefault(), "%.2fL", sensorData.waterLevel)
 
-            // Salinitas
+            // Prepare chip view lookups (safer than direct binding if nested deeply)
+            val chipSalinity = binding.root.findViewById<Chip>(R.id.chip_salinity)
+            val chipConductivity = binding.root.findViewById<Chip>(R.id.chip_conductivity)
+            val chipNitrogen = binding.root.findViewById<Chip>(R.id.chip_nitrogen)
+            val chipFosfor = binding.root.findViewById<Chip>(R.id.chip_fosfor)
+            val chipKalium = binding.root.findViewById<Chip>(R.id.chip_kalium)
+            val chipPh = binding.root.findViewById<Chip>(R.id.chip_soil_ph)
+            val chipMoisture = binding.root.findViewById<Chip>(R.id.chip_soil_moisture)
+            val chipTemperature = binding.root.findViewById<Chip>(R.id.chip_plant_temperature)
+
+            // Salinity
             binding.tvSalinitasValue.text = formatFloat(sensorData.salinity)
-
-            // Konduktivitas (EC)
+            SensorStatusMapper.mapConductivity(binding.root.context, sensorData.salinity)
+                .also { status ->
+                    chipSalinity?.apply {
+                        text = status.label
+                        setChipBackgroundColor(ColorStateList.valueOf(status.bgColor))
+                        setTextColor(status.textColor)
+                    }
+                }
+            // Conductivity
             binding.tvEcValue.text = formatFloat(sensorData.conductivity)
-
-            // Nitrogen (Int)
+            SensorStatusMapper.mapConductivity(binding.root.context, sensorData.conductivity)
+                .also { status ->
+                    chipConductivity?.apply {
+                        text = status.label
+                        setChipBackgroundColor(ColorStateList.valueOf(status.bgColor))
+                        setTextColor(status.textColor)
+                    }
+                }
+            // Nitrogen
             binding.tvNitrogenValue.text = sensorData.nitrogen.toString()
-
-            // Fosfor (Int)
+            SensorStatusMapper.mapNitrogen(binding.root.context, sensorData.nitrogen)
+                .also { status ->
+                    chipNitrogen?.apply {
+                        text = status.label
+                        setChipBackgroundColor(ColorStateList.valueOf(status.bgColor))
+                        setTextColor(status.textColor)
+                    }
+                }
+            // Phosphorus
             binding.tvFosforValue.text = sensorData.phosphorus.toString()
-
-            // Kalium (Int)
+            SensorStatusMapper.mapPhosphorus(binding.root.context, sensorData.phosphorus)
+                .also { status ->
+                    chipFosfor?.apply {
+                        text = status.label
+                        setChipBackgroundColor(ColorStateList.valueOf(status.bgColor))
+                        setTextColor(status.textColor)
+                    }
+                }
+            // Potassium
             binding.tvKaliumValue.text = sensorData.kalium.toString()
-
+            SensorStatusMapper.mapPotassium(binding.root.context, sensorData.kalium)
+                .also { status ->
+                    chipKalium?.apply {
+                        text = status.label
+                        setChipBackgroundColor(ColorStateList.valueOf(status.bgColor))
+                        setTextColor(status.textColor)
+                    }
+                }
             // pH
             binding.tvPhValue.text = formatFloat(sensorData.ph)
-
-            // Kelembapan
+            SensorStatusMapper.mapPh(binding.root.context, sensorData.ph).also { status ->
+                chipPh?.apply {
+                    text = status.label
+                    setChipBackgroundColor(ColorStateList.valueOf(status.bgColor))
+                    setTextColor(status.textColor)
+                }
+            }
+            // Moisture
             binding.tvKelembapanValue.text = formatFloat(sensorData.moisture)
-
-            // Suhu
+            SensorStatusMapper.mapMoisture(binding.root.context, sensorData.moisture)
+                .also { status ->
+                    chipMoisture?.apply {
+                        text = status.label
+                        setChipBackgroundColor(ColorStateList.valueOf(status.bgColor))
+                        setTextColor(status.textColor)
+                    }
+                }
+            // Temperature
             binding.tvSuhuValue.text = formatFloat(sensorData.temperature)
-        }
-
-        private fun formatNumber(value: Double): String {
-            return if (value % 1.0 == 0.0) {
-                String.format(Locale.getDefault(), "%.0f", value)
-            } else {
-                String.format(Locale.getDefault(), "%.1f", value)
+            SensorStatusMapper.mapPlantTemperature(binding.root.context, sensorData.temperature)
+                .also { status ->
+                    chipTemperature?.apply {
+                        text = status.label
+                        setChipBackgroundColor(ColorStateList.valueOf(status.bgColor))
+                        setTextColor(status.textColor)
+                    }
             }
         }
 
@@ -122,13 +180,11 @@ class PotDashboardAdapter(
                 )
                 PotDashboardViewHolder(binding)
             }
-
             VIEW_TYPE_ADD -> {
                 val binding =
                     ItemAddPotBinding.inflate(LayoutInflater.from(parent.context), parent, false)
                 AddPotViewHolder(binding)
             }
-
             else -> throw IllegalArgumentException("Invalid view type")
         }
     }
@@ -145,7 +201,7 @@ class PotDashboardAdapter(
     fun submitList(newItems: List<PotItem>) {
         items.clear()
         items.addAll(newItems)
-        notifyDataSetChanged()
+        notifyDataSetChanged() // Could optimize with DiffUtil later
     }
 
     fun updateExpandedItem(potId: String, detailData: PotDetailData?) {
@@ -154,15 +210,11 @@ class PotDashboardAdapter(
         } else {
             expandedItems.remove(potId)
         }
-        // Find position and notify
         val position = items.indexOfFirst { it.potId == potId }
         if (position != -1) {
             notifyItemChanged(position)
         }
     }
 
-    fun isExpanded(potId: String): Boolean {
-        return expandedItems.containsKey(potId)
-    }
+    fun isExpanded(potId: String): Boolean = expandedItems.containsKey(potId)
 }
-

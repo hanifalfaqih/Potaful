@@ -2,10 +2,22 @@
     <string name="app_name">Potafull</string>
 
     <!-- Profile Screen -->
-    <string name="profile_title">Ubah Profil</string>
-    <string name="profile_name_label">Nama</string>
-    <string name="profile_location_label">Tempat Tinggal</string>
-    <string name="profile_save_button">Simpan</string>
-    <string name="profile_name_hint">Masukkan nama</string>
-    <string name="profile_location_hint">Masukkan tempat tinggal</string>
+    <string name="profile_title">Edit Profile</string>
+    <string name="profile_name_label">Name</string>
+    <string name="profile_location_label">Home Location</string>
+    <string name="profile_save_button">Save</string>
+    <string name="profile_name_hint">Enter name</string>
+    <string name="profile_location_hint">Enter your location</string>
+
+    <!-- Recommendation Plant Result -->
+    <string name="recommendation_result_title">Here are plant recommendations perfect for you!</string>
+    <string name="recommendation_result_subtitle">Tap each card to see why we recommend it</string>
+    <string name="btn_go_to_dashboard">Go to Dashboard</string>
+
+    <!-- Weather and Greeting -->
+    <string name="weather_loading">Loading weather...</string>
+    <string name="weather_error">Failed to load weather</string>
+    <string name="air_humidity_format">Air Humidity: %d%%</string>
+    <string name="greeting_user">Halo, %1$s!</string>
+    <string name="default_user_name">User</string>
 </resources>

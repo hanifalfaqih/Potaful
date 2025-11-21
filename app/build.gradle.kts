@@ -73,6 +73,9 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.lifecycle.runtime.ktx)
 
+    // Fragment KTX for activityViewModels
+    implementation(libs.androidx.fragment.ktx)
+
     // SwipeRefreshLayout for pull-to-refresh (explicit dependency because catalog alias unresolved)
     implementation(libs.androidx.swiperefreshlayout)
 
