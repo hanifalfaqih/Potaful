@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/forest_brown_darkest"
     tools:context=".ui.onboarding.OnboardingPage1Fragment">
 
     <TextView
@@ -13,7 +13,8 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
-        android:text="Yuk, kasih tahu dulu pot kamu bakal tumbuh di mana?"
+        android:fontFamily="@font/manrope_bold"
+        android:text="Ready? First, tell us where your pot will grow."
         android:textColor="@color/white"
         android:textSize="32sp"
         android:textStyle="bold" />
@@ -24,27 +25,25 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:text="Biar Potafull bisa nyesuaiin rekomendasi tanaman sama iklimnya!"
+        android:fontFamily="@font/manrope_regular"
+        android:text="This helps Potafull adjust plant recommendations based on your climate!"
         android:textColor="@color/white"
         android:textSize="20sp" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.Material3.TextInputLayout.FilledBox"
+    <EditText
+        android:id="@+id/et_location"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="16dp"
-        android:hint="(Contoh: Tangerang, Banten)"
-        app:boxBackgroundColor="@color/forest_tan"
-        app:hintTextColor="@color/white"
-        app:placeholderTextColor="@color/white">
+        android:background="@drawable/bg_edittext_rounded"
+        android:fontFamily="@font/manrope_regular"
+        android:hint="Example: Bekasi, Jawa Barat)"
+        android:inputType="text"
+        android:maxLines="1"
+        android:textColor="@color/white"
+        android:textColorHint="#B3FFFFFF" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/white" />
-
-    </com.google.android.material.textfield.TextInputLayout>
 
 </LinearLayout>

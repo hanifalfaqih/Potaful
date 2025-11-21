@@ -17,6 +17,8 @@ class PreferenceManager(context: Context) {
         private const val KEY_USER_PHOTO = "user_photo"
         private const val KEY_IS_LOGGED_IN = "is_logged_in"
         private const val KEY_IS_ONBOARDING_COMPLETED = "is_onboarding_completed"
+        private const val KEY_PLANT_RECOMMENDATION = "plant_recommendation"
+        private const val KEY_USER_LOCATION = "user_location"
     }
 
     // Authentication Token
@@ -64,6 +66,13 @@ class PreferenceManager(context: Context) {
         return preferences.getString(KEY_USER_PHOTO, null)
     }
 
+    // User Location
+    fun saveUserLocation(location: String) {
+        preferences.edit().putString(KEY_USER_LOCATION, location).apply()
+    }
+
+    fun getUserLocation(): String? = preferences.getString(KEY_USER_LOCATION, null)
+
     // Login Status
     fun setLoggedIn(isLoggedIn: Boolean) {
         preferences.edit().putBoolean(KEY_IS_LOGGED_IN, isLoggedIn).apply()
@@ -82,6 +91,15 @@ class PreferenceManager(context: Context) {
         return preferences.getBoolean(KEY_IS_ONBOARDING_COMPLETED, false)
     }
 
+    // Plant Recommendation (stored as JSON string)
+    fun savePlantRecommendation(jsonString: String) {
+        preferences.edit().putString(KEY_PLANT_RECOMMENDATION, jsonString).apply()
+    }
+
+    fun getPlantRecommendation(): String? {
+        return preferences.getString(KEY_PLANT_RECOMMENDATION, null)
+    }
+
     // Clear all user data (for logout)
     fun clearUserData() {
         preferences.edit().apply {
@@ -90,6 +108,7 @@ class PreferenceManager(context: Context) {
             remove(KEY_USER_NAME)
             remove(KEY_USER_EMAIL)
             remove(KEY_USER_PHOTO)
+            remove(KEY_USER_LOCATION)
             putBoolean(KEY_IS_LOGGED_IN, false)
         }.apply()
     }
@@ -99,4 +118,3 @@ class PreferenceManager(context: Context) {
         preferences.edit().clear().apply()
     }
 }
-

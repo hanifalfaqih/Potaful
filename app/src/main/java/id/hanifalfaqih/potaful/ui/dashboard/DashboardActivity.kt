@@ -61,20 +61,26 @@ class DashboardActivity : AppCompatActivity() {
         setupObservers()
         loadUserProfile()
         loadMyPots()
+        loadHydration() // load summary list from hydration endpoint
         setupWeather()
     }
 
     private fun setupRecyclerViews() {
         potSummaryAdapter = PotSummaryAdapter(onWaterClick = { pot ->
-            Toast.makeText(this, "Siram: ${pot.typeName}", Toast.LENGTH_SHORT).show()
+            val token = preferenceManager.getAuthToken().orEmpty()
+            pot.id?.let { potId ->
+                viewModel.wateringPot(token, potId)
+            }
         }, onItemClick = { pot ->
             // Scroll to corresponding item in main list and expand
-            val position = potDashboardAdapter.items.indexOfFirst { it.potId == pot.potId }
-            if (position != -1) {
-                binding.rvPotList.smoothScrollToPosition(position)
-                if (!potDashboardAdapter.isExpanded(pot.potId)) {
-                    val token = preferenceManager.getAuthToken().orEmpty()
-                    viewModel.loadPotDetail(token, pot.potId)
+            pot.id?.let { potId ->
+                val position = potDashboardAdapter.items.indexOfFirst { it.potId == potId }
+                if (position != -1) {
+                    binding.rvPotList.smoothScrollToPosition(position)
+                    if (!potDashboardAdapter.isExpanded(potId)) {
+                        val token = preferenceManager.getAuthToken().orEmpty()
+                        viewModel.loadPotDetail(token, potId)
+                    }
                 }
             }
         })
@@ -87,13 +93,15 @@ class DashboardActivity : AppCompatActivity() {
         potDashboardAdapter = PotDashboardAdapter(
             onItemClick = { pot ->
                 // Toggle expand/collapse
-                if (potDashboardAdapter.isExpanded(pot.potId)) {
-                    // Collapse
-                    potDashboardAdapter.updateExpandedItem(pot.potId, null)
-                } else {
-                    // Expand - fetch detail data
-                    val token = preferenceManager.getAuthToken().orEmpty()
-                    viewModel.loadPotDetail(token, pot.potId)
+                pot.potId?.let { potId ->
+                    if (potDashboardAdapter.isExpanded(potId)) {
+                        // Collapse
+                        potDashboardAdapter.updateExpandedItem(potId, null)
+                    } else {
+                        // Expand - fetch detail data
+                        val token = preferenceManager.getAuthToken().orEmpty()
+                        viewModel.loadPotDetail(token, potId)
+                    }
                 }
             },
             onAddPotClick = {
@@ -108,6 +116,7 @@ class DashboardActivity : AppCompatActivity() {
         // Setup SwipeRefreshLayout
         swipeRefresh.setOnRefreshListener {
             loadMyPots()
+            loadHydration()
             refreshWeather()
         }
         swipeRefresh.setColorSchemeResources(
@@ -118,7 +127,8 @@ class DashboardActivity : AppCompatActivity() {
     }
 
     private fun refreshWeather() {
-        val city = binding.tvLocationUser.text?.toString()!!.ifEmpty { "Tangerang" }
+        val savedLocation = preferenceManager.getUserLocation()
+        val city = savedLocation?.ifBlank { "Tangerang" } ?: "Tangerang"
         viewModel.loadWeather(city, BuildConfig.OPEN_WEATHER_API_KEY)
     }
 
@@ -142,7 +152,6 @@ class DashboardActivity : AppCompatActivity() {
                 is DashboardViewModel.PotsState.Success -> {
                     hideLoadingOverlay()
                     swipeRefresh.isRefreshing = false
-                    potSummaryAdapter.submitList(state.pots)
                     potDashboardAdapter.submitList(state.pots)
                 }
 
@@ -163,7 +172,7 @@ class DashboardActivity : AppCompatActivity() {
                 }
 
                 is DashboardViewModel.AddPotState.Loading -> {
-                    showLoadingOverlay("Menambahkan pot...")
+                    showLoadingOverlay("Loading pot data...")
                 }
 
                 is DashboardViewModel.AddPotState.Success -> {
@@ -184,16 +193,13 @@ class DashboardActivity : AppCompatActivity() {
         viewModel.weatherState.observe(this) { state ->
             when (state) {
                 is DashboardViewModel.WeatherState.Loading -> {
-                    // Optionally show small shimmer or placeholder
-                    binding.tvCloudConditionUser.text = "Memuat cuaca..."
+                    binding.tvCloudConditionUser.text = "Loading weather..." // fallback literal
                 }
 
-                is DashboardViewModel.WeatherState.Success -> {
-                    bindWeather(state.data)
-                }
+                is DashboardViewModel.WeatherState.Success -> bindWeather(state.data)
 
                 is DashboardViewModel.WeatherState.Error -> {
-                    binding.tvCloudConditionUser.text = "Gagal memuat cuaca"
+                    binding.tvCloudConditionUser.text = "Failed to load weather" // fallback literal
                 }
             }
         }
@@ -212,10 +218,55 @@ class DashboardActivity : AppCompatActivity() {
                 is DashboardViewModel.PotDetailState.Error -> {
                     Toast.makeText(
                         this,
-                        "Gagal memuat detail: ${state.message}",
+                        "Failed to load detail: ${state.message}",
                         Toast.LENGTH_SHORT
                     ).show()
                     potDashboardAdapter.updateExpandedItem(state.potId, null)
+                }
+            }
+        }
+
+        viewModel.wateringState.observe(this) { state ->
+            when (state) {
+                is DashboardViewModel.WateringState.Idle -> {
+                    // Do nothing
+                }
+
+                is DashboardViewModel.WateringState.Loading -> {
+                    Toast.makeText(this, "Sending watering command...", Toast.LENGTH_SHORT).show()
+                }
+
+                is DashboardViewModel.WateringState.Success -> {
+                    Toast.makeText(this, state.message, Toast.LENGTH_SHORT).show()
+                    // After success, refresh detail if the item is currently expanded
+                    val potId = state.potId
+                    if (potDashboardAdapter.isExpanded(potId)) {
+                        val token = preferenceManager.getAuthToken().orEmpty()
+                        viewModel.loadPotDetail(token, potId)
+                    }
+                    viewModel.resetWateringState()
+                }
+
+                is DashboardViewModel.WateringState.Error -> {
+                    Toast.makeText(this, state.message, Toast.LENGTH_SHORT).show()
+                    viewModel.resetWateringState()
+                }
+            }
+        }
+
+        // Observe hydration summary for rv_summary
+        viewModel.hydrationState.observe(this) { state ->
+            when (state) {
+                is DashboardViewModel.HydrationState.Loading -> {
+                    // optional: show placeholder on rv_summary
+                }
+
+                is DashboardViewModel.HydrationState.Success -> {
+                    potSummaryAdapter.submitList(state.pots)
+                }
+
+                is DashboardViewModel.HydrationState.Error -> {
+                    Toast.makeText(this, state.message, Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -225,7 +276,7 @@ class DashboardActivity : AppCompatActivity() {
         val condition =
             data.weather.firstOrNull()?.description?.replaceFirstChar { it.uppercase() } ?: "-"
         binding.tvCloudConditionUser.text = condition
-        binding.tvAirHumidity.text = "Kelembapan udara: ${data.main.humidity}%"
+        binding.tvAirHumidity.text = "Air humidity: ${data.main.humidity}%" // fallback literal
         binding.tvTemperatureUser.text =
             String.format(Locale.getDefault(), "%.0f°C", data.main.temp)
         binding.tvLocationUser.text = data.name
@@ -252,15 +303,15 @@ class DashboardActivity : AppCompatActivity() {
         val etPotId = dialogView.findViewById<EditText>(R.id.et_pot_id)
 
         MaterialAlertDialogBuilder(this)
-            .setTitle("Tambah Pot")
-            .setMessage("Masukkan ID pot yang ingin ditambahkan")
+            .setTitle("Add Pot")
+            .setMessage("Enter the pot ID you want to add")
             .setView(dialogView)
             .setPositiveButton("Submit") { _, _ ->
                 val potId = etPotId.text.toString().trim()
                 val token = preferenceManager.getAuthToken().orEmpty()
                 viewModel.addPot(token, potId)
             }
-            .setNegativeButton("Batal", null)
+            .setNegativeButton("Cancel", null)
             .show()
     }
 
@@ -269,16 +320,20 @@ class DashboardActivity : AppCompatActivity() {
         viewModel.loadMyPots(token)
     }
 
+    private fun loadHydration() {
+        val token = preferenceManager.getAuthToken().orEmpty()
+        viewModel.loadHydrationSummary(token)
+    }
+
     private fun setupWeather() {
-        // Set initial date/time
-        val locale = Locale("in", "ID")
+        val locale = Locale.forLanguageTag("en-US")
         val dateFormat = SimpleDateFormat("EEEE, dd MMMM yyyy", locale)
         val timeFormat = SimpleDateFormat("HH:mm", locale)
         binding.tvDateUser.text = dateFormat.format(Date())
         binding.tvTimeUser.text = timeFormat.format(Date())
 
-        // Load weather for a default city (could be user preference later)
-        val city = "Tangerang"
+        val savedLocation = preferenceManager.getUserLocation()
+        val city = savedLocation?.ifBlank { "Tangerang" } ?: "Tangerang"
         viewModel.loadWeather(city, BuildConfig.OPEN_WEATHER_API_KEY)
     }
 
@@ -292,9 +347,8 @@ class DashboardActivity : AppCompatActivity() {
     }
 
     private fun loadUserProfile() {
-        // Load user name
-        val userName = preferenceManager.getUserName() ?: "Pengguna"
-        binding.tvGreetingUser.text = "Halo, $userName!"
+        val userName = preferenceManager.getUserName() ?: "User" // fallback literal
+        binding.tvGreetingUser.text = String.format(Locale.getDefault(), "Halo, %s!", userName)
 
         // Load user photo
         val photoUrl = preferenceManager.getUserPhoto()

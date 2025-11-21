@@ -72,7 +72,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_weight="1"
-                    android:text="Kesehatan Tanah"
+                    android:fontFamily="@font/manrope_medium"
+                    android:text="Soil Health"
                     android:textColor="@color/white"
                     android:textSize="14sp" />
 
@@ -80,6 +81,7 @@
                     android:id="@+id/tv_soil_health_percentage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/manrope_extrabold"
                     android:textColor="@color/white"
                     android:textSize="20sp"
                     android:textStyle="bold"
@@ -120,6 +122,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_weight="1"
+                    android:fontFamily="@font/manrope_medium"
                     android:text="Water Level"
                     android:textColor="@color/white"
                     android:textSize="14sp" />
@@ -128,6 +131,7 @@
                     android:id="@+id/tv_water_level"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/manrope_extrabold"
                     android:textColor="@color/white"
                     android:textSize="20sp"
                     android:textStyle="bold"
@@ -177,40 +181,48 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="Salinitas"
+                        android:fontFamily="@font/manrope_medium"
+                        android:text="Salinity"
                         android:textColor="@color/white"
                         android:textSize="12sp" />
 
-                    <TextView
-                        android:id="@+id/tv_salinitas_value"
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:textColor="@color/white"
-                        android:textSize="24sp"
-                        android:textStyle="bold"
-                        tools:text="0.6" />
+                        android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/tv_salinitas_unit"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="dpt"
-                        android:textColor="@color/white"
-                        android:textSize="10sp" />
+                        <TextView
+                            android:id="@+id/tv_salinitas_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="4dp"
+                            android:fontFamily="@font/manrope_extrabold"
+                            android:textColor="@color/white"
+                            android:textSize="24sp"
+                            android:textStyle="bold"
+                            tools:text="0.6" />
 
-                    <TextView
+                        <TextView
+                            android:id="@+id/tv_salinitas_unit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/manrope_extrabold"
+                            android:text="ppt"
+                            android:textColor="@color/white"
+                            android:textSize="14sp" />
+
+                    </LinearLayout>
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_salinity"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:background="@color/white"
-                        android:paddingStart="8dp"
-                        android:paddingTop="2dp"
-                        android:paddingEnd="8dp"
-                        android:paddingBottom="2dp"
+                        android:layout_gravity="end"
                         android:text="Baik"
                         android:textColor="@color/forest_brown_darkest"
-                        android:textSize="10sp" />
+                        app:chipBackgroundColor="@color/white"
+                        app:chipCornerRadius="16dp" />
 
                 </LinearLayout>
 
@@ -243,40 +255,48 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="Konduktivitas (EC)"
+                        android:fontFamily="@font/manrope_medium"
+                        android:text="Conductivity (EC)"
                         android:textColor="@color/white"
                         android:textSize="12sp" />
 
-                    <TextView
-                        android:id="@+id/tv_ec_value"
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:textColor="@color/white"
-                        android:textSize="24sp"
-                        android:textStyle="bold"
-                        tools:text="1.8" />
+                        android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/tv_ec_unit"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="mS/cm"
-                        android:textColor="@color/white"
-                        android:textSize="10sp" />
+                        <TextView
+                            android:id="@+id/tv_ec_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="4dp"
+                            android:fontFamily="@font/manrope_extrabold"
+                            android:textColor="@color/white"
+                            android:textSize="24sp"
+                            android:textStyle="bold"
+                            tools:text="1.8" />
 
-                    <TextView
+                        <TextView
+                            android:id="@+id/tv_ec_unit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/manrope_extrabold"
+                            android:text="mS/cm"
+                            android:textColor="@color/white"
+                            android:textSize="14sp" />
+
+                    </LinearLayout>
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_conductivity"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:background="@color/white"
-                        android:paddingStart="8dp"
-                        android:paddingTop="2dp"
-                        android:paddingEnd="8dp"
-                        android:paddingBottom="2dp"
+                        android:layout_gravity="end"
                         android:text="Baik"
                         android:textColor="@color/forest_brown_darkest"
-                        android:textSize="10sp" />
+                        app:chipBackgroundColor="@color/white"
+                        app:chipCornerRadius="16dp" />
 
                 </LinearLayout>
 
@@ -309,40 +329,49 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
+                        android:fontFamily="@font/manrope_medium"
                         android:text="Nitrogen (N)"
                         android:textColor="@color/white"
                         android:textSize="12sp" />
 
-                    <TextView
-                        android:id="@+id/tv_nitrogen_value"
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:textColor="@color/white"
-                        android:textSize="24sp"
-                        android:textStyle="bold"
-                        tools:text="45" />
+                        android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/tv_nitrogen_unit"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="mg/kg"
-                        android:textColor="@color/white"
-                        android:textSize="10sp" />
+                        <TextView
+                            android:id="@+id/tv_nitrogen_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="4dp"
+                            android:fontFamily="@font/manrope_extrabold"
+                            android:textColor="@color/white"
+                            android:textSize="24sp"
+                            android:textStyle="bold"
+                            tools:text="45" />
 
-                    <TextView
+                        <TextView
+                            android:id="@+id/tv_nitrogen_unit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/manrope_extrabold"
+                            android:text="mg/kg"
+                            android:textColor="@color/white"
+                            android:textSize="14sp" />
+
+                    </LinearLayout>
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_nitrogen"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
+                        android:layout_gravity="end"
                         android:background="@color/white"
-                        android:paddingStart="8dp"
-                        android:paddingTop="2dp"
-                        android:paddingEnd="8dp"
-                        android:paddingBottom="2dp"
                         android:text="Baik"
                         android:textColor="@color/forest_brown_darkest"
-                        android:textSize="10sp" />
+                        app:chipBackgroundColor="@color/white"
+                        app:chipCornerRadius="16dp" />
 
                 </LinearLayout>
 
@@ -375,40 +404,49 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
+                        android:fontFamily="@font/manrope_medium"
                         android:text="Fosfor (P)"
                         android:textColor="@color/white"
                         android:textSize="12sp" />
 
-                    <TextView
-                        android:id="@+id/tv_fosfor_value"
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:textColor="@color/white"
-                        android:textSize="24sp"
-                        android:textStyle="bold"
-                        tools:text="22" />
+                        android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/tv_fosfor_unit"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="mg/kg"
-                        android:textColor="@color/white"
-                        android:textSize="10sp" />
+                        <TextView
+                            android:id="@+id/tv_fosfor_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="4dp"
+                            android:fontFamily="@font/manrope_extrabold"
+                            android:textColor="@color/white"
+                            android:textSize="24sp"
+                            android:textStyle="bold"
+                            tools:text="22" />
 
-                    <TextView
+                        <TextView
+                            android:id="@+id/tv_fosfor_unit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/manrope_extrabold"
+                            android:text="mg/kg"
+                            android:textColor="@color/white"
+                            android:textSize="14sp" />
+
+                    </LinearLayout>
+
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_fosfor"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:background="@color/white"
-                        android:paddingStart="8dp"
-                        android:paddingTop="2dp"
-                        android:paddingEnd="8dp"
-                        android:paddingBottom="2dp"
+                        android:layout_gravity="end"
                         android:text="Baik"
                         android:textColor="@color/forest_brown_darkest"
-                        android:textSize="10sp" />
+                        app:chipBackgroundColor="@color/white"
+                        app:chipCornerRadius="16dp" />
 
                 </LinearLayout>
 
@@ -441,40 +479,49 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="Kalium (K)"
+                        android:fontFamily="@font/manrope_medium"
+                        android:text="Kalium (K) (Potassium)"
                         android:textColor="@color/white"
                         android:textSize="12sp" />
 
-                    <TextView
-                        android:id="@+id/tv_kalium_value"
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:textColor="@color/white"
-                        android:textSize="24sp"
-                        android:textStyle="bold"
-                        tools:text="60" />
+                        android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/tv_kalium_unit"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="mg/kg"
-                        android:textColor="@color/white"
-                        android:textSize="10sp" />
+                        <TextView
+                            android:id="@+id/tv_kalium_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="4dp"
+                            android:fontFamily="@font/manrope_extrabold"
+                            android:textColor="@color/white"
+                            android:textSize="24sp"
+                            android:textStyle="bold"
+                            tools:text="60" />
 
-                    <TextView
+                        <TextView
+                            android:id="@+id/tv_kalium_unit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/manrope_extrabold"
+                            android:text="mg/kg"
+                            android:textColor="@color/white"
+                            android:textSize="14sp" />
+
+                    </LinearLayout>
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_kalium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:background="@color/white"
-                        android:paddingStart="8dp"
-                        android:paddingTop="2dp"
-                        android:paddingEnd="8dp"
-                        android:paddingBottom="2dp"
+                        android:layout_gravity="end"
+                        android:fontFamily="@font/manrope_extrabold"
                         android:text="Baik"
                         android:textColor="@color/forest_brown_darkest"
-                        android:textSize="10sp" />
+                        app:chipBackgroundColor="@color/white"
+                        app:chipCornerRadius="16dp" />
 
                 </LinearLayout>
 
@@ -507,40 +554,48 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="pH Tanah"
+                        android:fontFamily="@font/manrope_medium"
+                        android:text="Soil pH"
                         android:textColor="@color/white"
                         android:textSize="12sp" />
 
-                    <TextView
-                        android:id="@+id/tv_ph_value"
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:textColor="@color/white"
-                        android:textSize="24sp"
-                        android:textStyle="bold"
-                        tools:text="6.5" />
+                        android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/tv_ph_unit"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="pH"
-                        android:textColor="@color/white"
-                        android:textSize="10sp" />
+                        <TextView
+                            android:id="@+id/tv_ph_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="4dp"
+                            android:fontFamily="@font/manrope_extrabold"
+                            android:textColor="@color/white"
+                            android:textSize="24sp"
+                            android:textStyle="bold"
+                            tools:text="6.5" />
 
-                    <TextView
+                        <TextView
+                            android:id="@+id/tv_ph_unit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/manrope_extrabold"
+                            android:text="pH"
+                            android:textColor="@color/white"
+                            android:textSize="14sp" />
+
+                    </LinearLayout>
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_soil_ph"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:background="@color/white"
-                        android:paddingStart="8dp"
-                        android:paddingTop="2dp"
-                        android:paddingEnd="8dp"
-                        android:paddingBottom="2dp"
+                        android:layout_gravity="end"
                         android:text="Ideal"
                         android:textColor="@color/forest_brown_darkest"
-                        android:textSize="10sp" />
+                        app:chipBackgroundColor="@color/white"
+                        app:chipCornerRadius="16dp" />
 
                 </LinearLayout>
 
@@ -572,40 +627,49 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="Kelembapan Tanah"
+                        android:fontFamily="@font/manrope_medium"
+                        android:text="Soil Moisture"
                         android:textColor="@color/white"
                         android:textSize="12sp" />
 
-                    <TextView
-                        android:id="@+id/tv_kelembapan_value"
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:textColor="@color/white"
-                        android:textSize="24sp"
-                        android:textStyle="bold"
-                        tools:text="72" />
+                        android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/tv_kelembapan_unit"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="%"
-                        android:textColor="@color/white"
-                        android:textSize="10sp" />
+                        <TextView
+                            android:id="@+id/tv_kelembapan_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="4dp"
+                            android:fontFamily="@font/manrope_extrabold"
+                            android:textColor="@color/white"
+                            android:textSize="24sp"
+                            android:textStyle="bold"
+                            tools:text="72" />
 
-                    <TextView
+                        <TextView
+                            android:id="@+id/tv_kelembapan_unit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/manrope_extrabold"
+                            android:text="%"
+                            android:textColor="@color/white"
+                            android:textSize="14sp" />
+
+
+                    </LinearLayout>
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_soil_moisture"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:background="@color/white"
-                        android:paddingStart="8dp"
-                        android:paddingTop="2dp"
-                        android:paddingEnd="8dp"
-                        android:paddingBottom="2dp"
+                        android:layout_gravity="end"
                         android:text="Baik"
                         android:textColor="@color/forest_brown_darkest"
-                        android:textSize="10sp" />
+                        app:chipBackgroundColor="@color/white"
+                        app:chipCornerRadius="16dp" />
 
                 </LinearLayout>
 
@@ -637,40 +701,48 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="Suhu Tanaman"
+                        android:fontFamily="@font/manrope_medium"
+                        android:text="Plant Temperature"
                         android:textColor="@color/forest_brown_darkest"
                         android:textSize="12sp" />
 
-                    <TextView
-                        android:id="@+id/tv_suhu_value"
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:textColor="@color/forest_brown_darkest"
-                        android:textSize="24sp"
-                        android:textStyle="bold"
-                        tools:text="20" />
+                        android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/tv_suhu_unit"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="°C"
-                        android:textColor="@color/forest_brown_darkest"
-                        android:textSize="10sp" />
+                        <TextView
+                            android:id="@+id/tv_suhu_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="4dp"
+                            android:fontFamily="@font/manrope_extrabold"
+                            android:textColor="@color/forest_brown_darkest"
+                            android:textSize="24sp"
+                            android:textStyle="bold"
+                            tools:text="20" />
 
-                    <TextView
+                        <TextView
+                            android:id="@+id/tv_suhu_unit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/manrope_extrabold"
+                            android:text="°C"
+                            android:textColor="@color/forest_brown_darkest"
+                            android:textSize="14sp" />
+
+                    </LinearLayout>
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_plant_temperature"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:background="@color/white"
-                        android:paddingStart="8dp"
-                        android:paddingTop="2dp"
-                        android:paddingEnd="8dp"
-                        android:paddingBottom="2dp"
+                        android:layout_gravity="end"
                         android:text="Baik"
                         android:textColor="@color/forest_brown_darkest"
-                        android:textSize="10sp" />
+                        app:chipBackgroundColor="@color/white"
+                        app:chipCornerRadius="16dp" />
 
                 </LinearLayout>
 

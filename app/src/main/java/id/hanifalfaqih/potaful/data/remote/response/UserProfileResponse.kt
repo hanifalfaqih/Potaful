@@ -31,8 +31,8 @@ data class UserProfileData(
     @SerializedName("email")
     val email: String,
 
-    @SerializedName("photo")
-    val photo: String?,
+    @SerializedName("url_photo")
+    val urlPhoto: String?,
 
     @SerializedName("created_at")
     val createdAt: String,

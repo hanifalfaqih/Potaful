@@ -23,19 +23,22 @@ data class PotsData(
 
 data class PotItem(
     @SerializedName("pot_id")
-    val potId: String,
+    val potId: String?,
 
     @SerializedName("type_name")
-    val typeName: String,
+    val typeName: String?,
+
+    @SerializedName("water_level")
+    val waterLevel: Float?,
 
     @SerializedName("max_water")
-    val maxWater: Int,
+    val maxWater: Int?,
 
     @SerializedName("soil_health")
-    val soilHealth: Float,
+    val soilHealth: Float?,
 
     @SerializedName("last_update")
-    val lastUpdate: String
+    val lastUpdate: String?
 )
 
 data class PotDetailResponse(
