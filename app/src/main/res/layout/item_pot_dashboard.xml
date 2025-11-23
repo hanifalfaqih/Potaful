@@ -221,6 +221,7 @@
                         android:layout_gravity="end"
                         android:text="Baik"
                         android:textColor="@color/forest_brown_darkest"
+                        app:chipStrokeWidth="0dp"
                         app:chipBackgroundColor="@color/white"
                         app:chipCornerRadius="16dp" />
 
@@ -295,6 +296,7 @@
                         android:layout_gravity="end"
                         android:text="Baik"
                         android:textColor="@color/forest_brown_darkest"
+                        app:chipStrokeWidth="0dp"
                         app:chipBackgroundColor="@color/white"
                         app:chipCornerRadius="16dp" />
 
@@ -370,6 +372,7 @@
                         android:background="@color/white"
                         android:text="Baik"
                         android:textColor="@color/forest_brown_darkest"
+                        app:chipStrokeWidth="0dp"
                         app:chipBackgroundColor="@color/white"
                         app:chipCornerRadius="16dp" />
 
@@ -445,6 +448,7 @@
                         android:layout_gravity="end"
                         android:text="Baik"
                         android:textColor="@color/forest_brown_darkest"
+                        app:chipStrokeWidth="0dp"
                         app:chipBackgroundColor="@color/white"
                         app:chipCornerRadius="16dp" />
 
@@ -520,6 +524,7 @@
                         android:fontFamily="@font/manrope_extrabold"
                         android:text="Baik"
                         android:textColor="@color/forest_brown_darkest"
+                        app:chipStrokeWidth="0dp"
                         app:chipBackgroundColor="@color/white"
                         app:chipCornerRadius="16dp" />
 
@@ -594,6 +599,7 @@
                         android:layout_gravity="end"
                         android:text="Ideal"
                         android:textColor="@color/forest_brown_darkest"
+                        app:chipStrokeWidth="0dp"
                         app:chipBackgroundColor="@color/white"
                         app:chipCornerRadius="16dp" />
 
@@ -668,6 +674,7 @@
                         android:layout_gravity="end"
                         android:text="Baik"
                         android:textColor="@color/forest_brown_darkest"
+                        app:chipStrokeWidth="0dp"
                         app:chipBackgroundColor="@color/white"
                         app:chipCornerRadius="16dp" />
 
@@ -741,6 +748,7 @@
                         android:layout_gravity="end"
                         android:text="Baik"
                         android:textColor="@color/forest_brown_darkest"
+                        app:chipStrokeWidth="0dp"
                         app:chipBackgroundColor="@color/white"
                         app:chipCornerRadius="16dp" />
 

@@ -20,4 +20,15 @@
     <string name="air_humidity_format">Air Humidity: %d%%</string>
     <string name="greeting_user">Halo, %1$s!</string>
     <string name="default_user_name">User</string>
+
+    <!-- All Pots Screen -->
+    <string name="all_pots_title">All Pots</string>
+    <string name="status_urgent">Urgent</string>
+    <string name="status_warning">Warning</string>
+    <string name="status_safe">Safe</string>
+    <string name="no_pots_available">No pots available</string>
+    <string name="loading">Loading...</string>
+    <string name="back">Back</string>
+    <string name="water_now">Water Now</string>
+    <string name="soil_hydration">Soil Hydration:</string>
 </resources>
