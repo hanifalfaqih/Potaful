@@ -16,6 +16,9 @@
 
         <!-- Activities lain -->
         <activity
+            android:name=".ui.allpots.AllPotsActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.profile.ProfileActivity"
             android:exported="false" />
         <activity

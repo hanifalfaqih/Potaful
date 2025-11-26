@@ -42,6 +42,10 @@ class DashboardActivity : AppCompatActivity() {
     private lateinit var potSummaryAdapter: PotSummaryAdapter
     private lateinit var potDashboardAdapter: PotDashboardAdapter
 
+    // For realtime clock
+    private val handler = android.os.Handler(android.os.Looper.getMainLooper())
+    private lateinit var clockRunnable: Runnable
+
     companion object {
         private const val REQUEST_PROFILE = 1001
     }
@@ -140,6 +144,12 @@ class DashboardActivity : AppCompatActivity() {
         binding.ivProfileUser.setOnClickListener {
             val intent = Intent(this, ProfileActivity::class.java)
             startActivityForResult(intent, REQUEST_PROFILE)
+        }
+
+        binding.tvSeeAllPots.setOnClickListener {
+            val intent =
+                Intent(this, id.hanifalfaqih.potaful.ui.allpots.AllPotsActivity::class.java)
+            startActivity(intent)
         }
     }
 
@@ -334,17 +344,38 @@ class DashboardActivity : AppCompatActivity() {
     }
 
     private fun setupWeather() {
-        val locale = Locale.forLanguageTag("en-US")
-        val dateFormat = SimpleDateFormat("EEEE, dd MMMM yyyy", locale)
-        val timeFormat = SimpleDateFormat("HH:mm", locale)
-        binding.tvDateUser.text = dateFormat.format(Date())
-        binding.tvTimeUser.text = timeFormat.format(Date())
+        // Start realtime clock
+        startRealtimeClock()
 
         // Load location from local database (PreferenceManager)
         val savedLocation = preferenceManager.getUserLocation()
         val city = savedLocation?.ifBlank { "Tangerang" } ?: "Tangerang"
         Log.d("DashboardActivity", "Loading weather for location from local DB: $city")
         viewModel.loadWeather(city, BuildConfig.OPEN_WEATHER_API_KEY)
+    }
+
+    private fun startRealtimeClock() {
+        val locale = Locale.forLanguageTag("en-US")
+        val dateFormat = SimpleDateFormat("EEEE, dd MMMM yyyy", locale)
+        val timeFormat = SimpleDateFormat("HH:mm", locale)
+
+        clockRunnable = object : Runnable {
+            override fun run() {
+                val currentDate = Date()
+                binding.tvDateUser.text = dateFormat.format(currentDate)
+                binding.tvTimeUser.text = timeFormat.format(currentDate)
+
+                // Update every second (1000ms)
+                handler.postDelayed(this, 1000)
+            }
+        }
+
+        // Start the clock immediately
+        handler.post(clockRunnable)
+    }
+
+    private fun stopRealtimeClock() {
+        handler.removeCallbacks(clockRunnable)
     }
 
     private fun showLoadingOverlay(message: String) {
@@ -395,5 +426,7 @@ class DashboardActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
+        // Stop realtime clock to prevent memory leaks
+        stopRealtimeClock()
     }
 }

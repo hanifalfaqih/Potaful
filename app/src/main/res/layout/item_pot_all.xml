@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="12dp"
+    android:backgroundTint="@color/forest_green_pale"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="2dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Pot Name and Status Badge -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <!-- Status Bar on Left -->
+            <View
+                android:id="@+id/status_indicator"
+                android:layout_width="4dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="12dp"
+                android:background="@color/status_bahaya_bg"
+                tools:background="@color/status_bahaya_bg" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_pot_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/manrope_extrabold"
+                    android:textColor="@color/forest_green_darkest"
+                    android:textSize="16sp"
+                    tools:text="Cabe Rawit punya LOUIS" />
+
+
+            </LinearLayout>
+
+            <!-- Status Badge -->
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_status_badge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/manrope_extrabold"
+                android:textColor="@color/forest_brown_darkest"
+                app:chipBackgroundColor="@color/white"
+                app:chipCornerRadius="16dp"
+                app:chipStrokeWidth="0dp"
+                tools:chipBackgroundColor="@color/status_bahaya_bg"
+                tools:text="URGENT"
+                tools:textColor="@color/status_bahaya_text" />
+
+        </LinearLayout>
+
+        <!-- Hydration Info -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/manrope_semibold"
+                android:text="@string/soil_hydration"
+                android:textColor="@color/forest_green_darkest"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tv_soil_hydration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/manrope_bold"
+                android:textColor="@color/forest_green_darkest"
+                android:textSize="14sp"
+                tools:text="0%" />
+
+        </LinearLayout>
+
+        <!-- Water Button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_water"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:backgroundTint="@color/white"
+            android:fontFamily="@font/manrope_extrabold"
+            android:text="@string/water_now"
+            android:textColor="@color/forest_brown_darkest"
+            android:textSize="14sp"
+            app:cornerRadius="8dp"
+            app:rippleColor="@color/forest_green_pale" />
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>
+
